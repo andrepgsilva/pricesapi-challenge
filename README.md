@@ -8,3 +8,8 @@ The import prices tool can be found inside the tools directory.
 The application logic can be found inside the folder Modules/PricesApi.
 - The Application directory has our usecases and dtos.
 - The Connectors has our ports and adapters.
+
+# Start App
+- composer install
+- npm install && npm run dev
+- php artisan serve

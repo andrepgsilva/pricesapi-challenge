@@ -17,7 +17,7 @@ class ImportPriceFromMysqlAdapter implements ImportPriceOutboundPort
             "SELECT 
                 a.id, a.external_reference AS account_reference, 
                 pd.id, pd.sku, pr.product_id, pr.account_id, 
-                pr.quantity, pr.value
+                pr.quantity, pr.value AS price
                 FROM prices AS pr
                 JOIN accounts AS a ON pr.account_id = a.id
                 JOIN products AS pd ON pr.product_id = pd.id
@@ -34,7 +34,7 @@ class ImportPriceFromMysqlAdapter implements ImportPriceOutboundPort
 
         return DB::select(
             "SELECT 
-                pd.sku, MIN(pr.value) AS value FROM prices AS pr
+                pd.sku, MIN(pr.value) AS price FROM prices AS pr
                 JOIN products AS pd ON pr.product_id = pd.id
                 WHERE 
                     pr.account_id IS NULL AND pd.sku IN (" . $binders . ")
